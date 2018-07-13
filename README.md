@@ -5,7 +5,7 @@
 
 ```
 //安装依赖
-npm i -S vue-echarts-sedu
+npm i -S vue-path-breadcrumb
 //运行项目
 npm run dev
 ```
