@@ -1,10 +1,10 @@
-# VUE Echarts 图片基础组件
+# VUE Path Breadcrumb 文件路径层级面包屑
 
-## 支持多个图表共存
+> 效果：
+> 返回上一级 | 全部文件 Mark Lopez > Timothy > Robinson > Mark Clark Cynthia > Jackson > John Wilson
 
 ```
 //安装依赖
-npm i -S echarts
 npm i -S vue-echarts-sedu
 //运行项目
 npm run dev
@@ -14,70 +14,34 @@ npm run dev
 
 ```
 main.js:   加入
-  import seduEcharts from 'vue-echarts-sedu'
+  import seduPathBreadcrumb from 'vue-path-breadcrumb'
 
-  Vue.use(seduEcharts);
+  Vue.use(seduPathBreadcrumb);
 
 ---
 
-具体视图：
 <template>
-  <sedu-echarts domId="aaaa"
-                :option=option1 />
-
-  <sedu-echarts domId="bbb"
-                :option=option1 />  
+  <sedu-path-breadcrumb ref="seduPathBreadcrumb"
+                        :callBack="getFileList" />
 </template>
 
+---
 <script>
-export default {
-  data () {
-    return {
-      option1: {}
-    }
+  mounted () {
+    // 把根路径加入面包屑，对象是你刷新数据时要发送的json对象。
+    this.$refs.seduPathBreadcrumb.addPath({key: 666})
   },
-  created(){
-    setTimeout(() => {
-      this.option1 = {
-        title: { text: "ECharts Gauge" },
-        tooltip: { formatter: "{a} <br/>{b} : {c}%" },
-        series: [
-          {
-            name: "业务指标",
-            type: "gauge",
-            detail: { formatter: "{value}%" },
-            data: [{ value: 50 }]
-          }
-        ]
-      };
-      }, 3000);
+  methods: {
+    // a链接的方法中也要把对象传入面包屑
+    // 对象最少包含2个字段
+    // {
+    //    name:'目录名',    //面包屑上显示的目录名
+    //    key:'234feewrwr'  //更新父组件文件列表需要的关键字
+    // }
+    updateTable (obj) {
+      this.$refs.seduPathBreadcrumb.addPath(obj)
+      this.getFileList(obj)
+    },
   }
-}
 </script>
-```
-
-> 参数
-
-```
-props: {
-    // 自定义class
-    cname: {
-      type: String,
-      default: ''
-    },
-    // 自定义行内样式
-    myStyle: {
-      type: String,
-      default: ''
-    },
-    // echarts的配置参数
-    option: {
-      type: Object,
-      required: true
-    },
-    // dom元素的id，区分多个图表
-    domId: {
-      type: String,
-      required: true
-    }
 ```

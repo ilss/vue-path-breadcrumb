@@ -1,16 +1,14 @@
 /*
  * @Author: Liang Liang
- * @Date: 2018-07-07 17:48:39
+ * @Date: 2018-07-12 10:02:15
  * @LastEditors: Liang Liang
- * @LastEditTime: 2018-07-10 15:36:39
- * @Description: 
+ * @LastEditTime: 2018-07-12 10:02:15
+ * @Description:
  */
-import seduEcharts from './seduEcharts';
-import echarts from 'echarts';
+import seduPathBreadcrumb from './pathBreadcrumb';
 const comment = {
   install(Vue) {
-    Vue.prototype.$echarts = echarts;
-    Vue.component('seduEcharts', seduEcharts);
+    Vue.component('seduPathBreadcrumb', seduPathBreadcrumb);
   },
 };
 if (typeof window !== 'undefined' && window.Vue) {

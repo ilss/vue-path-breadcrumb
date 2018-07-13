@@ -1,37 +1,28 @@
 <template>
   <div>
     <!-- 语言切换 -->
-    <sedu-echarts domId="aaaa"
-                  :option=option1 />
-    <sedu-echarts domId="bbb"
-                  :option=option1 />
+    <sedu-path-breadcrumb ref="seduPathBreadcrumb"
+                          :callBack="getFileList"></sedu-path-breadcrumb>
   </div>
 </template>
 
 <script>
 export default {
   name: 'app',
-  data () {
+  data() {
     return {
-      option1: {}
-    }
+      targetPath: null,
+    };
   },
-  created(){
-    setTimeout(() => {
-      this.option1 = {
-        title: { text: "ECharts Gauge" },
-        tooltip: { formatter: "{a} <br/>{b} : {c}%" },
-        series: [
-          {
-            name: "业务指标",
-            type: "gauge",
-            detail: { formatter: "{value}%" },
-            data: [{ value: 50 }]
-          }
-        ]
-      };
-      }, 3000);
+  created() {},
+  mounted () {
+    // 把根路径加入面包屑
+    this.$refs.seduPathBreadcrumb.addPath({key: 666})
+  },
+  methods:{
+    getFileList () {
+    },
   }
-}
+};
 </script>
 
