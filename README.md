@@ -10,6 +10,43 @@ npm i -S vue-path-breadcrumb
 npm run dev
 ```
 
+> 参数
+
+```
+props: {
+    // 自定义行内样式
+    myStyle: {
+      type: String,
+      default: ''
+    },
+    // 自定义class
+    cname: {
+      type: String,
+      default: 'components-path-breadcrumb'
+    },
+    // 匹配文件夹的key
+    matchKeyName: {
+      type: String,
+      default: 'key'
+    },
+    // 点击面包屑链接 的回调函数
+    callBack: {
+      type: Function,
+      required: true
+    },
+    // 支持自定义文字，方便国际化
+    backLabel:{
+      type: String,
+      default:"返回上一级"
+    },
+    // 支持自定义文字，方便国际化
+    allFileLabel:{
+      type: String,
+      default:"全部文件"
+    },
+  },
+```
+
 > 调用
 
 ```

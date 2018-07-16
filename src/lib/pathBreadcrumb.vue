@@ -1,23 +1,27 @@
 /*
  * @Author: Liang Liang
- * @Date: 2018-07-12 10:02:28
+ * @Date: 2018-07-16 10:56:47
  * @LastEditors: Liang Liang
- * @LastEditTime: 2018-07-13 11:00:31
- * @Description:  路径面包屑组件
+ * @LastEditTime: 2018-07-16 10:56:47
+ * @Description: 
  */
 <template>
   <p :class="cname"
      :style="myStyle">
     <a href="javascript:void(0)"
        @click="goBack()"
-       v-if="pathData.length>1">返回上一级</a>
+       v-if="pathData.length>1">{{backLabel}}</a>
     <small v-if="pathData.length>1">|</small>
     <span v-for="(item,index) of pathData"
           :key="index">
       <a href="javascript:void(0)"
-         v-if="index!==pathData.length-1 && pathData.length>1"
+         v-if="index===0 && index!==pathData.length-1"
+         @click="gotoPath(item)">{{allFileLabel}}</a>
+      <i v-else-if="index === 0 && index===pathData.length-1">{{allFileLabel}}</i>
+      <a href="javascript:void(0)"
+         v-else-if="index>0 && index!==pathData.length-1"
          @click="gotoPath(item)">{{item.name}}</a>
-      <i v-else>{{item.name}}</i>
+      <i v-else-if="index>0 && index===pathData.length-1">{{item.name}}</i>
       <small v-if="pathData.length>1"
              class="el-icon-arrow-right" />
     </span>
@@ -54,7 +58,17 @@ export default {
     callBack: {
       type: Function,
       required: true
-    }
+    },
+    // 支持自定义文字，方便国际化
+    backLabel:{
+      type: String,
+      default:"返回上一级" 
+    },
+    // 支持自定义文字，方便国际化
+    allFileLabel:{
+      type: String,
+      default:"全部文件" 
+    },
   },
   created () {
     this.myPath = true
@@ -84,7 +98,7 @@ export default {
     addPath (targetPath) {
       this.pathData.push(targetPath)
       if (this.pathData.length === 1) {
-        this.pathData[0]['name'] = '全部文件'
+        this.pathData[0]['name'] = this.allFileLabel
       }
     },
     gotoPath (path) {
