@@ -1,10 +1,11 @@
 /*
  * @Author: Liang Liang
- * @Date: 2018-07-16 10:56:47
+ * @Date: 2018-08-14 10:20:16
  * @LastEditors: Liang Liang
- * @LastEditTime: 2018-07-16 10:56:47
+ * @LastEditTime: 2018-08-14 10:20:16
  * @Description: 
  */
+
 <template>
   <p :class="cname"
      :style="myStyle">
@@ -15,14 +16,14 @@
     <span v-for="(item,index) of pathData"
           :key="index">
       <a href="javascript:void(0)"
-         v-if="index===0 && index!==pathData.length-1"
+         v-if="index===0 && index!==pathData.length-1"     
          @click="gotoPath(item)">{{allFileLabel}}</a>
       <i v-else-if="index === 0 && index===pathData.length-1">{{allFileLabel}}</i>
       <a href="javascript:void(0)"
          v-else-if="index>0 && index!==pathData.length-1"
          @click="gotoPath(item)">{{item.name}}</a>
       <i v-else-if="index>0 && index===pathData.length-1">{{item.name}}</i>
-      <small v-if="pathData.length>1"
+      <small v-if="pathData.length>1 &&　index　!==pathData.length-1"
              class="el-icon-arrow-right" />
     </span>
   </p>
